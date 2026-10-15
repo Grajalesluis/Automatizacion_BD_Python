@@ -27,22 +27,22 @@ url = URL.create(
 # Crear el motor de conexión
 motor = create_engine(url)
 
-# Definir y crear la tabla completa
 try:
+    # Crear la tabla si todavía no existe
     with motor.begin() as conexion:
         conexion.execute(text("""
             CREATE TABLE IF NOT EXISTS personas_luis (
                 id INT AUTO_INCREMENT PRIMARY KEY,
-                nombre VARCHAR(100) NOT NULL,
-                apellido VARCHAR(100) NOT NULL,
-                correo VARCHAR(150) NOT NULL,
-                telefono VARCHAR(30),
-                direccion VARCHAR(200),
+                nombre VARCHAR(20) NOT NULL,
+                apellido VARCHAR(20) NOT NULL,
+                correo VARCHAR(50) NOT NULL,
+                telefono VARCHAR(15),
+                direccion VARCHAR(30),
                 ciudad VARCHAR(100),
                 pais VARCHAR(100),
                 fecha_nacimiento DATE,
-                ocupacion VARCHAR(100),
-                empresa VARCHAR(150)
+                ocupacion VARCHAR(30),
+                empresa VARCHAR(50)
             )
         """))
 
@@ -53,8 +53,10 @@ except Exception as error:
     print("Ocurrió un error:", error)
 
 finally:
+    # Cerrar las conexiones
     motor.dispose()
 
-# Ejecutar el programa principal
+
 if __name__ == "__main__":
     pass
+
